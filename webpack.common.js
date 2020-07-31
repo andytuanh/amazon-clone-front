@@ -1,57 +1,33 @@
-const path = require('path')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const HtmlWebPackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-    entry: "./src/index.js",
-    output: {
-        path: path.join(__dirname, 'public'),
-        filename: "bundle.js"
-    },
     module: {
-        rules: [{
-            loader: 'babel-loader',
-            test: /\.js$/,
-            exclude: /node_modules/
-        },
-        {
-            test: /\.s?css$/,
-            use: [
-                'style-loader',
-                MiniCssExtractPlugin.loader,
-                'css-loader',
-                'sass-loader'
-            ]
-        },
-        {
-            test: /\.html$/,
-            use: ['html-loader']
-        }]
+        rules: [
+            {
+                test: /\.(js|jsx)$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: "babel-loader"
+                }
+            },
+            {
+                test: /\.html$/,
+                use: ['html-loader']
+            },
+            {
+                test: /\.s?css$/,
+                use: [
+                    'style-loader',
+                    'css-loader'
+                ]
+            },
+        ]
     },
     plugins: [
-        new MiniCssExtractPlugin({
-            filename: "style.css"
-        }),
-        new HtmlWebpackPlugin({
-            template: './src/index.html',
-            filename: './index.html',
-            favicon: './public/favicon.ico',
-            minify: {
-                removeComments: true,
-                collapseWhitespace: true,
-                removeRedundantAttributes: true,
-                useShortDoctype: true,
-                removeEmptyAttributes: true,
-                removeStyleLinkTypeAttributes: true,
-                keepClosingSlash: true,
-                minifyJS: true,
-                minifyCSS: true,
-                minifyURLs: true,
-            },
-            inject: 'body' // inject script tags at end of body
-
-        }),
-        new CleanWebpackPlugin()
+        new HtmlWebPackPlugin({
+            template: "./src/index.html",
+            filename: "./index.html"
+        })
     ]
+    
 }
