@@ -35,7 +35,7 @@ module.exports = {
                             // if hmr does not work, this is a forceful method.
                             reloadAll: true,
                             publicPath: '/',
-                            sourceMap: !devMode
+                            sourceMap: devMode
                         },
                     },
                     {
@@ -43,7 +43,7 @@ module.exports = {
                         options: {
                             //property tells Webpack that class names needs to be obfuscated
                             modules: false,
-                            sourceMap: !devMode
+                            sourceMap: devMode
                         }
                     }
                 ]
