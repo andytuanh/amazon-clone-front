@@ -4,7 +4,9 @@ import './App.css';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Header from './Header';
 import Home from './Home';
-import Login from './Login'
+import Login from './Login';
+import './style.css';
+import Img from './img.jpg';
 
 function App() {
   return (
@@ -19,11 +21,18 @@ function App() {
             <Header />
             <Login />
           </Route>
+          <Route path="/img">
+            <Header />
+            <div className="bgImage">
+              <img src={Img} alt="" />
+            </div>
+          </Route>
           {/* this is the default route */}
           <Route path="/">
             <Header />
             <Home />
           </Route>
+          
         </Switch>
       </div>
     </Router>

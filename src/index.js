@@ -8,14 +8,16 @@ import reducer, { initialState } from './reducer';
 
 const wrapper = document.getElementById('root');
 
-wrapper ? ReactDOM.render(
+//document.querySelector("#ico-link").href = '/public/favicon.ico'
+
+ReactDOM.render(
   <React.StrictMode>
     <StateProvider initialState={initialState} reducer={reducer}>
       <App />
     </StateProvider>
   </React.StrictMode>, 
   wrapper
-) : false
+)
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

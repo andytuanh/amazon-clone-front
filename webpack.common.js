@@ -1,5 +1,7 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 
+const path = require('path')
+
 module.exports = {
     module: {
         rules: [
@@ -16,10 +18,16 @@ module.exports = {
             },
             {
                 test: /\.s?css$/,
+                exclude: /node_modules/,
                 use: [
                     'style-loader',
                     'css-loader'
                 ]
+            },
+            {
+                test: /\.(png|jpg|gif|ico|svg)$/,
+                exclude: /node_modules/,
+                use: ['file-loader'],
             },
         ]
     },
