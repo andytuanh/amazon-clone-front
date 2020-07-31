@@ -1,10 +1,12 @@
-const HtmlWebPackPlugin = require("html-webpack-plugin")
+const HtmlWebPackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const path = require('path');
+const TerserJSPlugin = require('terser-webpack-plugin')
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const path = require('path')
 
-const prodMode = process.env.NODE_ENV === 'production'
+const devMode = process.env.NODE_ENV !== 'production'
 
-console.log(prodMode)
+//console.log("Mode: " + process.env.NODE_ENV)
 
 module.exports = {
     module: {
@@ -33,13 +35,15 @@ module.exports = {
                             // if hmr does not work, this is a forceful method.
                             reloadAll: true,
                             publicPath: '/',
+                            sourceMap: !devMode
                         },
                     },
                     {
                         loader: 'css-loader',
                         options: {
                             //property tells Webpack that class names needs to be obfuscated
-                            modules: false
+                            modules: false,
+                            sourceMap: !devMode
                         }
                     }
                 ]
@@ -56,6 +60,30 @@ module.exports = {
             template: "./src/index.html",
             filename: "./index.html"
         }),
-    ]
+        new MiniCssExtractPlugin({
+            // Options similar to the same options in webpackOptions.output
+            // both options are optional
+            filename: devMode ? '[name].css' : '[name].[hash].css',
+            chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
+        }),
+    ],
+    optimization: {
+        minimize: !devMode,
+        minimizer: [new TerserJSPlugin({
+            test: /\.js(\?.*)?$/i,
+            terserOptions: {
+                mangle: true
+            }
+        }), new OptimizeCSSAssetsPlugin({})],
+        splitChunks: {
+            cacheGroups: {
+                commons: {
+                    test: /[\\/]node_modules[\\/]/,
+                    name: 'vendor',
+                    chunks: 'all'
+                }
+            }
+        }
+    },
     
 }
