@@ -2,14 +2,11 @@ const { merge } = require('webpack-merge');
 const common = require('./webpack.common');
 const path = require('path')
 
-const devMode = process.env.NODE_ENV !== 'production'
-
 module.exports = merge(common, {
     context: __dirname,
     mode: 'production',
     // options related to how webpack emits results
     entry: "./src/index.js",
-    devtool: 'source-map',
     output: {
         path: path.resolve(__dirname, "dist"), // string
     // the target directory for all output files
