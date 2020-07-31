@@ -1,10 +1,10 @@
-const HtmlWebPackPlugin = require("html-webpack-plugin");
-const TerserJSPlugin = require('terser-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const devMode = process.env.NODE_ENV !== 'production';
+const HtmlWebPackPlugin = require("html-webpack-plugin")
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const path = require('path');
 
-const path = require('path')
+const prodMode = process.env.NODE_ENV === 'production'
+
+console.log(prodMode)
 
 module.exports = {
     module: {
@@ -35,7 +35,13 @@ module.exports = {
                             publicPath: '/',
                         },
                     },
-                    'css-loader'
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            //property tells Webpack that class names needs to be obfuscated
+                            modules: false
+                        }
+                    }
                 ]
             },
             {
@@ -50,25 +56,6 @@ module.exports = {
             template: "./src/index.html",
             filename: "./index.html"
         }),
-        new MiniCssExtractPlugin({
-            // Options similar to the same options in webpackOptions.output
-            // both options are optional
-            filename: devMode ? '[name].css' : '[name].[hash].css',
-            chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
-        }),
-    ],
-    optimization: {
-        minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})],
-        splitChunks: {
-            cacheGroups: {
-                styles: {
-                    name: 'styles',
-                    test: /\.css$/,
-                    chunks: 'all',
-                    enforce: true,
-                },
-            },
-        },
-    },
+    ]
     
 }
