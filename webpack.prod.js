@@ -15,9 +15,5 @@ module.exports = merge(common, {
         publicPath: '/', // string
     // the url to the output directory resolved relative to the HTML page
     },
-    
-    
-    
-
 
 })
