@@ -12,7 +12,7 @@ module.exports = {
             },
             {
                 test: /\.html$/,
-                use: ['html-loader']
+                use: ['htmllint-loader', 'html-loader']
             },
             {
                 test: /\.s?css$/,
