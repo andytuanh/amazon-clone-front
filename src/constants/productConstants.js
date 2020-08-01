@@ -27,7 +27,7 @@ export const favicons = {
     uber: 'https://d1nyezh1ys8wfo.cloudfront.net/favicon.ico',
     webpack: 'https://webpack.js.org/icon_144x144.png',
     youtube: 'https://www.youtube.com/s/desktop/ca54e1bd/img/favicon_32.png',
-    key: function(name) {
+    get: function(name) {
         let idx = -1
         let props = Object.keys(this)
         for(; idx < props.length; ) {

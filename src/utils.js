@@ -6,7 +6,7 @@ let randomPropValueOf = (object) => {
 }
 
 export const getFavicon = (favicon) => {
-    return favicons.key(favicon) != null ? favicons.key(favicon) : ''
+    return favicons.get(favicon) != null ? favicons.get(favicon) : ''
 }
 
 export const loadFavicon = (favicon) => {
