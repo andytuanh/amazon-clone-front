@@ -1,4 +1,3 @@
-import { requirePropFactory } from "@material-ui/core"
 import { favicons } from './constants/productConstants'
 
 let randomPropValueOf = (object) => {
