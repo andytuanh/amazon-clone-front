@@ -11,3 +11,7 @@ $ yarn start
 $ serve -s dist
 
 ```
+
+#### What's new in the branch:
+- use <HeadProvider> from package react-head
+- load one of favicons
